@@ -3,6 +3,7 @@ import ThemeToggle from './ThemeToggle'
 import { Logo } from './custom/logo'
 import { useState, useEffect } from 'react'
 import { NAV_LINKS } from 'libs/navigation'
+import { Button } from './ui/Button'
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
@@ -66,6 +67,8 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <Button variant="ghost">Ingresar</Button>
+          <Button variant="default">Crear Cuenta</Button>
           <ThemeToggle />
           <button
             type="button"

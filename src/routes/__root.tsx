@@ -17,7 +17,27 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title:
+          'Gestion Rodado, vender nunca fue tan facil',
+      },
+      {
+        name: 'description',
+        content:
+          'Administra tus ventas de vehiculos, obten un seguimiento semanal, mensual y anual de tus ventas y crea documentos con un clic.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'Vehículos, Consecionaria, Rapidez, Agilidad, Compra y venta de autos, Compra y venta de vehículos, Compra y venta de automóviles, rodados'
+      },
+      {
+        property: 'og:title',
+        content: 'Gestion Rodado',
+      },
+      {
+        property: 'og:description',
+        content:
+          'Administra tus ventas de vehiculos, obten un seguimiento semanal, mensual y anual de tus ventas y crea documentos con un clic.',
       },
     ],
     links: [
