@@ -1,9 +1,9 @@
 import { MenuIcon, X } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
-import { Logo } from './custom/logo'
 import { useState, useEffect } from 'react'
 import { NAV_LINKS } from 'libs/navigation'
 import { Button } from './ui/Button'
+import { Logo } from './custom/Logo'
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
@@ -48,7 +48,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-(--line) bg-(--header-bg) px-4 backdrop-blur-lg">
+    <header className="sticky flex top-0 z-50 border-b border-(--line) bg-(--header-bg) px-4 backdrop-blur-lg">
       <nav className="page-wrap flex items-center justify-between py-3 sm:py-4">
         <div className="flex items-center gap-x-2 shrink-0">
           <Logo />
@@ -67,8 +67,8 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <Button variant="ghost">Ingresar</Button>
-          <Button variant="default">Crear Cuenta</Button>
+          <Button className='hidden md:flex' variant="ghost">Ingresar</Button>
+          <Button className='hidden md:flex' variant="default">Crear Cuenta</Button>
           <ThemeToggle />
           <button
             type="button"
@@ -92,6 +92,8 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <Button variant="default">Crear Cuenta</Button>
+          <Button variant="ghost">Ingresar</Button>
         </div>
       )}
     </header>

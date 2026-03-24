@@ -26,6 +26,8 @@
   --chip-line: rgba(249, 115, 22, 0.3);
   --hero-a: rgba(249, 115, 22, 0.15);
   --hero-b: rgba(15, 118, 110, 0.1);
+
+  --header-height: 64px;
 }
 
 :root[data-theme="dark"] {
@@ -107,8 +109,12 @@ a:hover {
 }
 
 .page-wrap {
-  width: min(1080px, calc(100% - 2rem));
+  width: min(1280px, calc(100% - 2rem));
   margin-inline: auto;
+}
+
+header {
+  height: var(--header-height);
 }
 
 .display-title {

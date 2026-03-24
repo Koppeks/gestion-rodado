@@ -4,7 +4,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="mt-20 flex flex-col gap-4 border-y border-(--line) px-4 pb-14 pt-10 text-(--sea-ink-soft)">
+    <footer className="flex flex-col gap-4 border-y border-(--line) px-4 pb-14 pt-10 text-(--sea-ink-soft)">
       <div className="page-wrap flex justify-start gap-4">
         <nav>
           {NAV_LINKS.filter((l) => l.sectionId).map((link) => (
