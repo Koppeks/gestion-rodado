@@ -9,50 +9,195 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as PublicRouteImport } from './routes/_public'
+import { Route as PublicIndexRouteImport } from './routes/_public.index'
+import { Route as DashboardLayoutRouteImport } from './routes/dashboard/_layout'
+import { Route as AuthLayoutRouteImport } from './routes/auth/_layout'
+import { Route as AuthLayoutSignupRouteImport } from './routes/auth/_layout.signup'
+import { Route as AuthLayoutRecoverPasswordRouteImport } from './routes/auth/_layout.recover-password'
+import { Route as AuthLayoutLoginRouteImport } from './routes/auth/_layout.login'
 
-const IndexRoute = IndexRouteImport.update({
+const PublicRoute = PublicRouteImport.update({
+  id: '/_public',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => PublicRoute,
+} as any)
+const DashboardLayoutRoute = DashboardLayoutRouteImport.update({
+  id: '/dashboard/_layout',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLayoutRoute = AuthLayoutRouteImport.update({
+  id: '/auth/_layout',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLayoutSignupRoute = AuthLayoutSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AuthLayoutRoute,
+} as any)
+const AuthLayoutRecoverPasswordRoute =
+  AuthLayoutRecoverPasswordRouteImport.update({
+    id: '/recover-password',
+    path: '/recover-password',
+    getParentRoute: () => AuthLayoutRoute,
+  } as any)
+const AuthLayoutLoginRoute = AuthLayoutLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthLayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof PublicIndexRoute
+  '/auth': typeof AuthLayoutRouteWithChildren
+  '/dashboard': typeof DashboardLayoutRoute
+  '/auth/login': typeof AuthLayoutLoginRoute
+  '/auth/recover-password': typeof AuthLayoutRecoverPasswordRoute
+  '/auth/signup': typeof AuthLayoutSignupRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/auth': typeof AuthLayoutRouteWithChildren
+  '/dashboard': typeof DashboardLayoutRoute
+  '/': typeof PublicIndexRoute
+  '/auth/login': typeof AuthLayoutLoginRoute
+  '/auth/recover-password': typeof AuthLayoutRecoverPasswordRoute
+  '/auth/signup': typeof AuthLayoutSignupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_public': typeof PublicRouteWithChildren
+  '/auth/_layout': typeof AuthLayoutRouteWithChildren
+  '/dashboard/_layout': typeof DashboardLayoutRoute
+  '/_public/': typeof PublicIndexRoute
+  '/auth/_layout/login': typeof AuthLayoutLoginRoute
+  '/auth/_layout/recover-password': typeof AuthLayoutRecoverPasswordRoute
+  '/auth/_layout/signup': typeof AuthLayoutSignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/auth/login'
+    | '/auth/recover-password'
+    | '/auth/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/auth'
+    | '/dashboard'
+    | '/'
+    | '/auth/login'
+    | '/auth/recover-password'
+    | '/auth/signup'
+  id:
+    | '__root__'
+    | '/_public'
+    | '/auth/_layout'
+    | '/dashboard/_layout'
+    | '/_public/'
+    | '/auth/_layout/login'
+    | '/auth/_layout/recover-password'
+    | '/auth/_layout/signup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  PublicRoute: typeof PublicRouteWithChildren
+  AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
+  DashboardLayoutRoute: typeof DashboardLayoutRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_public': {
+      id: '/_public'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof PublicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_public/': {
+      id: '/_public/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof PublicIndexRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/dashboard/_layout': {
+      id: '/dashboard/_layout'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardLayoutRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auth/_layout': {
+      id: '/auth/_layout'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/_layout/signup': {
+      id: '/auth/_layout/signup'
+      path: '/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthLayoutSignupRouteImport
+      parentRoute: typeof AuthLayoutRoute
+    }
+    '/auth/_layout/recover-password': {
+      id: '/auth/_layout/recover-password'
+      path: '/recover-password'
+      fullPath: '/auth/recover-password'
+      preLoaderRoute: typeof AuthLayoutRecoverPasswordRouteImport
+      parentRoute: typeof AuthLayoutRoute
+    }
+    '/auth/_layout/login': {
+      id: '/auth/_layout/login'
+      path: '/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLayoutLoginRouteImport
+      parentRoute: typeof AuthLayoutRoute
     }
   }
 }
 
+interface PublicRouteChildren {
+  PublicIndexRoute: typeof PublicIndexRoute
+}
+
+const PublicRouteChildren: PublicRouteChildren = {
+  PublicIndexRoute: PublicIndexRoute,
+}
+
+const PublicRouteWithChildren =
+  PublicRoute._addFileChildren(PublicRouteChildren)
+
+interface AuthLayoutRouteChildren {
+  AuthLayoutLoginRoute: typeof AuthLayoutLoginRoute
+  AuthLayoutRecoverPasswordRoute: typeof AuthLayoutRecoverPasswordRoute
+  AuthLayoutSignupRoute: typeof AuthLayoutSignupRoute
+}
+
+const AuthLayoutRouteChildren: AuthLayoutRouteChildren = {
+  AuthLayoutLoginRoute: AuthLayoutLoginRoute,
+  AuthLayoutRecoverPasswordRoute: AuthLayoutRecoverPasswordRoute,
+  AuthLayoutSignupRoute: AuthLayoutSignupRoute,
+}
+
+const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
+  AuthLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  PublicRoute: PublicRouteWithChildren,
+  AuthLayoutRoute: AuthLayoutRouteWithChildren,
+  DashboardLayoutRoute: DashboardLayoutRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

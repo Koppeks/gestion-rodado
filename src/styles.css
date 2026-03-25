@@ -28,6 +28,7 @@
   --hero-b: rgba(15, 118, 110, 0.1);
 
   --header-height: 64px;
+  --footer-height: 32px;
 }
 
 :root[data-theme="dark"] {
@@ -97,17 +98,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: var(--secondary-deep);
-  text-decoration-color: rgba(50, 143, 151, 0.4);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-a:hover {
-  color: var(--navigation-tone);
-}
-
 .page-wrap {
   width: min(1280px, calc(100% - 2rem));
   margin-inline: auto;
@@ -115,6 +105,10 @@ a:hover {
 
 header {
   height: var(--header-height);
+}
+
+.footer-auth {
+  height: var(--footer-height);
 }
 
 .display-title {

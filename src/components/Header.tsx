@@ -67,8 +67,8 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <Button className='hidden md:flex' variant="ghost">Ingresar</Button>
-          <Button className='hidden md:flex' variant="default">Crear Cuenta</Button>
+          <Button href='/auth/login' className='hidden md:flex' variant="ghost">Ingresar</Button>
+          <Button href='/auth/signup' className='hidden md:flex' variant="default">Crear Cuenta</Button>
           <ThemeToggle />
           <button
             type="button"
